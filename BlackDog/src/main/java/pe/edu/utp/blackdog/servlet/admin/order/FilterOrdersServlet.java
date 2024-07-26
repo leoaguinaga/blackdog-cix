@@ -29,7 +29,6 @@ public class FilterOrdersServlet extends HttpServlet {
             Customer_orderDAO customerOrderDAO = new Customer_orderDAO();
             customerOrders = customerOrderDAO.getOrdersByState(state);
             customerOrderDAO.close();
-
             req.setAttribute("customerOrders", customerOrders);
             req.getRequestDispatcher("orders.jsp").forward(req, resp);
         } catch (Exception e) {

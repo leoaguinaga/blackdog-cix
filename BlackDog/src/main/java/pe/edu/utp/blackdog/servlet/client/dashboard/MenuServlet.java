@@ -35,15 +35,11 @@ public class MenuServlet extends HttpServlet {
             ProductDAO productDAO = new ProductDAO();
             Product_ingredientDAO productIngredientDAO = new Product_ingredientDAO();
             IngredientDAO ingredientDAO = new IngredientDAO();
-
             List<Product> products = productDAO.getProductsByType(productType);
             Map<Long, String> productIngredientsMap = new HashMap<>();
-
-            // Filtrar productos que no contienen " + Extras" en su nombre
             List<Product> filteredProducts = products.stream()
                     .filter(product -> !product.getName().contains(" + Extras"))
                     .collect(Collectors.toList());
-
             if (!filteredProducts.isEmpty() && productType == Product_Type.HAMBURGER) {
                 for (Product product : filteredProducts) {
                     List<Product_ingredient> ingredients = productIngredientDAO.getProductIngredientsByProductId(product.getProduct_id());

@@ -20,15 +20,7 @@
     <jsp:include page="loginError.jsp" />
     <jsp:include page="modal_about.jsp" />
     <jsp:include page="singin.jsp" />
-
     <br>
-    <div class="middle-text">
-        <h4>Mi perfil</h4>
-        <a href="/profile"><button class="btn-primary" style="margin:0; padding:10px 15px; border-radius: 25px">Mis datos</button></a>
-        <a href="#"><button class="btn-primary" style="margin:0; padding:10px 15px; border-radius: 25px">Mis pedidos</button></a>
-        <a href="#"><button class="btn-primary" style="margin:0; padding:10px 15px; border-radius: 25px">Mis burgers</button></a>
-    </div>
-
     <div class="container-form">
         <div class="col-md-6">
             <form action="updateClient" method="post">

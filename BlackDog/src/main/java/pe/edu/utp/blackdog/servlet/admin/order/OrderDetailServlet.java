@@ -25,20 +25,14 @@ public class OrderDetailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         long id = Long.parseLong(req.getParameter("id"));
-
         List<Order_detail> order_detailList;
-
         try {
             Order_detailDAO orderDetailDAO = new Order_detailDAO();
             Customer_orderDAO customerOrderDAO = new Customer_orderDAO();
-
             order_detailList = orderDetailDAO.getOrderDetailsByOrderId(id);
-
             Customer_order customerOrder = customerOrderDAO.getOrderById(id);
-
             orderDetailDAO.close();
             customerOrderDAO.close();
-
             req.setAttribute("order_detailList", order_detailList);
             req.setAttribute("customer_order", customerOrder);
             req.getRequestDispatcher("order_detail.jsp").forward(req, resp);

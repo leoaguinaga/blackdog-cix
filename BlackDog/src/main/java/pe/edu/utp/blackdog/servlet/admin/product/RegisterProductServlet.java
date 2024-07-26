@@ -33,8 +33,6 @@ public class RegisterProductServlet extends HttpServlet {
         double price = Double.parseDouble(req.getParameter("price"));
         Part filePart = req.getPart("image");
         String img = getFileName(filePart);
-
-
         try {
             Product product = Product.createProductWithoutId(name, img, price, Product_Type.valueOf(type));
             ProductDAO productDAO = new ProductDAO();
@@ -47,7 +45,7 @@ public class RegisterProductServlet extends HttpServlet {
             UTPBinary.echobin(fileContent, "/tmp/" + img);
 
             if(type.equals("HAMBURGER")) {
-
+                productDAO.close();
                 req.setAttribute("product", product);
                 req.setAttribute("ingredients", ingredients);
                 req.getRequestDispatcher("setIngredients.jsp").forward(req, resp);

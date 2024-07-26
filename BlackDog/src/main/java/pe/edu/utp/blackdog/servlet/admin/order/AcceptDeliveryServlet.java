@@ -25,19 +25,15 @@ public class AcceptDeliveryServlet extends HttpServlet {
 
         try{
             Customer_orderDAO customer_orderDAO = new Customer_orderDAO();
-
             Customer_order co = customer_orderDAO.getOrderById(customer_order_id);
             Customer_order cou = Customer_order.createOrder(co.getCustomer_order_id(),
                     co.getClient(), co.getOrder_date(), co.getAddress(), co.getAmount(),
                     state, co.getEvidence_image());
-
             customer_orderDAO.updateOrder(cou, customer_order_id);
-
             String destination = customer_orderDAO.getOrderById(customer_order_id).getAddress();
             customer_orderDAO.close();
             req.setAttribute("destination", destination);
             req.getRequestDispatcher("deliveryDrive.jsp").forward(req, resp);
-
         } catch (Exception e) {
             String msg = "Error al actualizar el estado del pedido";
             req.setAttribute("message", msg + ". " + e.getMessage());

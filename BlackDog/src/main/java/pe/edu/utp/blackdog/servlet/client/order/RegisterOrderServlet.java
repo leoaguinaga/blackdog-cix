@@ -38,9 +38,7 @@ public class RegisterOrderServlet extends HttpServlet {
         Part filePart = req.getPart("evidence");
         String evidence = "evidence"+LocalDateTime.now();
         ApachePOI apachePOI = new ApachePOI();
-
         Map<Long, Integer> car = (Map<Long, Integer>) session.getAttribute("car");
-
         if (email_client==null){
             String msg = "Inicia sesión para poder registrar tu pedido";
             req.setAttribute("message", msg);
@@ -51,55 +49,37 @@ public class RegisterOrderServlet extends HttpServlet {
                 Order_detailDAO order_detailDAO = new Order_detailDAO();
                 ProductDAO productDAO = new ProductDAO();
                 ClientDAO clientDAO = new ClientDAO();
-
-
                 Client client = clientDAO.getClientByEmail(email_client);
-
-                // Crear la orden
                 Customer_order customerOrder =
                         Customer_order
                                 .createOrderWithoutId
                                         (client, LocalDateTime.now(), address, totalPrice, evidence);
-
-                // Registrar la orden en la base de datos
                 customer_orderDAO.registerOrder(customerOrder);
                 Customer_order co = customer_orderDAO.getLastCustomer_order();
-
                 byte[] fileContent = filePart.getInputStream().readAllBytes();
                 UTPBinary.echobin(fileContent, "/tmp/" + evidence);
-
                 if (car != null && !car.isEmpty()) {
                     for (Map.Entry<Long, Integer> entry : car.entrySet()) {
                         Long productId = entry.getKey();
                         Integer quantity = entry.getValue();
-
                         Product product = productDAO.getProductById(productId);
-
                         Order_detail orderDetail = Order_detail.createOrderDetail(
                                 co, product, quantity);
 
-                        // Registrar el detalle de la orden en la base de datos
                         order_detailDAO.registerOrder_detail(orderDetail);
                     }
                 }
-
                 clientDAO.close();
                 productDAO.close();
                 customer_orderDAO.close();
                 order_detailDAO.close();
-
                 session.removeAttribute("totalPrice");
                 session.removeAttribute("car");
-
                 apachePOI.sendEmail(co.getClient().getEmail(),
                         "Pedido de Black Dog " + co.getOrderDateTime().toString(),
                         State.ON_HOLD.getDisplayName());
-
-                // Redirigir a la página de confirmación
                 req.setAttribute("customerOrder", co);
                 req.getRequestDispatcher("orderConfirmation.jsp").forward(req, resp);
-
-
             } catch (Exception e) {
                 String msg = "Error al registrar la orden";
                 req.setAttribute("message", msg + ". " + e.getMessage());

@@ -32,24 +32,23 @@ public class LoginServlet extends HttpServlet {
         try {
             Auth auth = new Auth();
             String userType = auth.getTipoUsuario(email, password);
-
+            auth.close();
             if(userType == null){
                 req.setAttribute("isError", true);
                 req.getRequestDispatcher("index.jsp").forward(req, resp);
             }
-
             HttpSession session = req.getSession();
             session.setAttribute("email", email);
             session.setAttribute("userType", userType);
             WorkerDAO workerDAO =  new WorkerDAO();
             Worker worker;
-
             switch(userType){
                 case "client":
                     HashMap<Product, Integer> saleCar = new HashMap<>();
                     ClientDAO clientDAO = new ClientDAO();
                     Client client = clientDAO.getClientByEmail(email);
                     clientDAO.close();
+                    workerDAO.close();
                     session.setAttribute("saleCar", saleCar);
                     session.setAttribute("client", client);
                     session.setAttribute("name", client.getFirst_name());

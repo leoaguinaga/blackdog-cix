@@ -25,12 +25,10 @@ public class AddIngredientServlet extends HttpServlet {
         try {
             IngredientDAO ingredientDAO = new IngredientDAO();
             Ingredient ingredient = Ingredient.createIngredientWithoutId(name, price);
-
             ingredientDAO.registerIngredient(ingredient);
             ingredientDAO.close();
 
             resp.sendRedirect("ingredients");
-
         } catch (Exception e) {
             String msg = "No se pudo agregar el ingrediente";
             req.setAttribute("message", msg + ". " + e.getMessage());

@@ -28,7 +28,6 @@ public class WorkersServlet extends HttpServlet {
             WorkerDAO workerDAO = new WorkerDAO();
             workers = workerDAO.getAllWorkers();
             workerDAO.close();
-
             req.setAttribute("workers", workers);
             req.getRequestDispatcher("workers.jsp").forward(req, resp);
         } catch (Exception e) {

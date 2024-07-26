@@ -158,8 +158,8 @@
         </div>
     </div>
 </div>
-
 <script src="https://maps.googleapis.com/maps/api/js?key=API_KEY&libraries=places"></script>
+
 <script>
     let map;
     let marker;

@@ -24,12 +24,10 @@ public class DeliveryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         State state = State.WAITING_DRIVER;
         List<Customer_order> customerOrders = new ArrayList<>();
-
         try {
             Customer_orderDAO customerOrderDAO = new Customer_orderDAO();
             customerOrders = customerOrderDAO.getOrdersByState(state);
             customerOrderDAO.close();
-
             req.setAttribute("customerOrders", customerOrders);
             req.getRequestDispatcher("delivery.jsp").forward(req, resp);
         } catch (Exception e) {

@@ -26,7 +26,6 @@ public class OrdersServlet extends HttpServlet {
         try {
             Customer_orderDAO customerOrderDAO = new Customer_orderDAO();
             customerOrders = customerOrderDAO.getAllOrders();
-
             customerOrderDAO.close();
 
             req.setAttribute("customerOrders", customerOrders);
