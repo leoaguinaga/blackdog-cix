@@ -159,7 +159,7 @@
     </div>
 </div>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtWFd_3Gt-l9bHY7Iv5My8uG9vpq-vb58&libraries=places"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=API_KEY&libraries=places"></script>
 <script>
     let map;
     let marker;
