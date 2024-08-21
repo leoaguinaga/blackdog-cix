@@ -57,37 +57,6 @@
 </section>
 
 <section class="about" id="about">
-
-    <div class="about-img">
-        <img src="img/logo final.png" class="img-fluid" alt="logoBlackDog">
-    </div>
-
-    <div class="about-text">
-        <h2>Misión</h2>
-        <p>
-            Deleitar a los habitantes de Chiclayo con alimentos frescos, sabrosos y de alta calidad,
-            como hamburguesas, salchipapas y chaufa, preparados con pasión y entregados
-            directamente a sus puertas. Nos dedicamos a brindar una experiencia de servicio al
-            cliente excepcional, asegurando rapidez, conveniencia y satisfacción en cada pedido,
-            adaptándonos a las necesidades de nuestros clientes en un mundo cada vez más digital.
-        </p>
-    </div>
-    <div class="about-text">
-        <h2>Visión</h2>
-        <p>
-            Convertirnos en el referente líder de la comida rápida delivery en Chiclayo, reconocidos
-            por nuestra calidad, sabor inigualable y compromiso con la satisfacción del cliente.
-            Aspiramos a expandir nuestra presencia y capacidad de servicio, logrando que cada
-            comida entregada represente una experiencia culinaria única. Nos vemos en el futuro
-            como una marca consolidada y preferida, con planes de expansión que incluyan locales
-            físicos para una mayor cercanía con nuestros clientes, manteniendo siempre nuestra
-            esencia innovadora y centrada en el cliente.
-        </p>
-    </div>
-
-    <div class="about-img">
-        <img src="img/logo final.png" class="img-fluid" alt="logoBlackDog">
-    </div>
     <div class="container-boton">
         <a href="${pageContext.request.contextPath}/checkout" class="nav-link">
             <span class="icon-wtsp">
